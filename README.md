@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Student Multipurpose Card
 
-## Getting Started
+This Next.js-based project aims to replace traditional student ID cards with streamlined NFC-enabled cards. Students can easily access crucial information on demand, while the school benefits from:
 
-First, run the development server:
+-    Efficient attendance tracking
+-    Centralized student data management
+-    Secure and user-friendly interfaces for both students and admins.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Transforming Student Information Management with NFC
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Frontend
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**General**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+-    **Homepage:** A simple landing page before login (may display school information, project title)
 
-## Learn More
+**Authentication**
 
-To learn more about Next.js, take a look at the following resources:
+-    **Login:**
+     -    Input fields for username/email and password
+     -    "Forgot Password?" link
+-    **Student Registration (Optional):**
+     -    Fields to collect necessary student data
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Student Area**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+-    **Student Dashboard:**
+     -    Profile summary (Name, Photo, ID, Course)
+     -    Fee Status (with visual indicators)
+     -    Tabs/Sections for:
+          -    Attendance Overview (calendar or list)
+          -    Exam Schedule (if applicable)
+          -    Notifications (if applicable)
+-    **Attendance Details:** (accessed via dashboard tab)
+     -    Detailed list or in-depth calendar view of attendance history
+     -    Might be PIN-protected
+-    **Exam Schedule:** (accessed via dashboard tab)
+     -    List of upcoming exams student is eligible for
+     -    Potentially PIN-protected
+-    **Profile Settings:**
+     -    Allow updating basic profile information (address, contact info)
+     -    Change PIN
 
-## Deploy on Vercel
+**Admin Area**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-    **Admin Dashboard:**
+     -    System overview (number of students, recent attendance trends, etc.)
+-    **Student Management:**
+     -    Add New Student (detailed form to input all data)
+     -    Edit Student Details
+     -    Search and filter students
+-    **Attendance Management:**
+     -    View Overview (attendance per class/date range)
+     -    Manual Attendance Editing (for corrections)
+-    **Exam Pass Management:**
+     -    Set Exam Eligibility Criteria (attendance based, fee based, etc.)
+     -    Issue/Revoke Exam Passes
+-    **Fee Management:**
+     -    View/filter fee payment status across students
+     -    Mark fees as paid
+-    **Reports (Optional):**
+     -    Attendance Reports (customizable by date range, course)
+     -    Fee Payment Reports
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Additional Notes**
+
+-    **Error Pages:** Include 404 (Not Found) and other error pages as needed.
+-    **Mobile Responsiveness:** Design for all screen sizes.

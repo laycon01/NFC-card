@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button';
 
-export default function Home() {
+export default function SignIn() {
 	return (
 		<div>
-			<Button>HOME PAGE</Button>
+			<Button>SIGN IN PAGE</Button>
 		</div>
 	);
 }

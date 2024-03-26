@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button';
 
-export default function Home() {
+export default function AdminFees() {
 	return (
 		<div>
-			<Button>HOME PAGE</Button>
+			<Button>ADMIN FEASE PAGE</Button>
 		</div>
 	);
 }

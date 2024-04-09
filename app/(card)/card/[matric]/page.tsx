@@ -25,8 +25,8 @@ export default function StudentSummaryPage({
 	);
 	const isCleared = true;
 	return (
-		<Card className='w-full max-w-md mx-auto p-6'>
-			<CardHeader className='flex flex-col items-center gap-5'>
+		<Card className='w-full max-w-md mx-auto p-2 flex flex-col gap-3'>
+			<div className='flex flex-col items-center gap-3'>
 				<div className='flex flex-col items-center'>
 					<Avatar className='h-32 w-32'>
 						<AvatarImage
@@ -69,8 +69,8 @@ export default function StudentSummaryPage({
 						<span>{student?.gender}</span>
 					</div>
 				</div>
-			</CardHeader>
-			<CardContent className='flex flex-col space-y-4'>
+			</div>
+			<div className='flex flex-col space-y-4'>
 				<div className='grid grid-cols-2 gap-4'>
 					<Dialog>
 						<DialogTrigger asChild>
@@ -79,7 +79,7 @@ export default function StudentSummaryPage({
 								Access Pass
 							</Button>
 						</DialogTrigger>
-						<DialogContent className='sm:max-w-[425px]'>
+						{/* <DialogContent className='sm:max-w-[425px]'>
 							<DialogHeader>
 								<DialogTitle>Fees</DialogTitle>
 								<DialogDescription>
@@ -165,7 +165,7 @@ export default function StudentSummaryPage({
 									</div>
 								)}
 							</DialogFooter>
-						</DialogContent>
+						</DialogContent> */}
 					</Dialog>
 					<Dialog>
 						<DialogTrigger asChild>
@@ -174,7 +174,7 @@ export default function StudentSummaryPage({
 								Attendance
 							</Button>
 						</DialogTrigger>
-						<DialogContent className='sm:max-w-[425px]'>
+						{/* <DialogContent className='sm:max-w-[425px]'>
 							<DialogHeader>
 								<DialogTitle>Attendance</DialogTitle>
 								<DialogDescription>
@@ -235,10 +235,10 @@ export default function StudentSummaryPage({
 									</tbody>
 								</table>
 							</div>
-						</DialogContent>
+						</DialogContent> */}
 					</Dialog>
 				</div>
-			</CardContent>
+			</div>
 		</Card>
 	);
 }

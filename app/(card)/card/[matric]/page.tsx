@@ -1,15 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card';
-import { CalendarCheckIcon, KeyIcon } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
 	Dialog,
 	DialogContent,
@@ -19,36 +11,66 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { STUDENTS } from '@/lib/consts';
+import { cn } from '@/lib/utils';
+import { CalendarCheckIcon, CheckCircle, KeyIcon, X } from 'lucide-react';
 
 export default function StudentSummaryPage({
 	params,
 }: {
 	params: { matric: string };
 }) {
+	const student = STUDENTS.find(
+		(student) => student['matric-number'] === params.matric
+	);
+	const isCleared = true;
 	return (
 		<Card className='w-full max-w-md mx-auto p-6'>
-			<CardHeader className='flex flex-col items-center space-y-2'>
-				<Avatar className='h-32 w-32'>
-					<AvatarImage
-						src='https://github.com/shadcn.png'
-						alt='@shadcn'
-					/>
-					<AvatarFallback>CN</AvatarFallback>
-				</Avatar>
-				<CardTitle className='text-2xl'>Mia Brown</CardTitle>
-				<CardDescription className='text-sm flex flex-col'>
-					Student ID: 1234567890
-					<span className=''>
-						Matric Number ID: {params.matric}
-					</span>
-				</CardDescription>
+			<CardHeader className='flex flex-col items-center gap-5'>
+				<div className='flex flex-col items-center'>
+					<Avatar className='h-32 w-32'>
+						<AvatarImage
+							src={student?.image}
+							alt={`Image for ${student?.name}`}
+						/>
+						<AvatarFallback>CN</AvatarFallback>
+					</Avatar>
+					<CardTitle className='text-2xl'>
+						{student?.name}
+					</CardTitle>
+				</div>
+				<div className='text-sm flex flex-col items-center gap-3 rounded-xl shadow w-full overflow-clip'>
+					<div className='flex justify-between w-full border-b p-2'>
+						<div className='font-bold'>Matric Number:</div>
+						<span>{student?.['matric-number']}</span>
+					</div>
+					<div className='flex justify-between w-full border-b p-2'>
+						<div className='font-bold'>Session:</div>
+						<span>{student?.session}</span>
+					</div>
+					<div className='flex justify-between w-full border-b p-2'>
+						<div className='font-bold'>Faculty:</div>
+						<span>{student?.faculty}</span>
+					</div>
+					<div className='flex justify-between w-full  border-b p-2'>
+						<div className='font-bold'>Department:</div>
+						<span>{student?.department}</span>
+					</div>
+					<div className='flex justify-between w-full  border-b p-2'>
+						<div className='font-bold'>Level:</div>
+						<span>{student?.level}</span>
+					</div>
+					<div className='flex justify-between w-full  border-b p-2'>
+						<div className='font-bold'>Semester:</div>
+						<span>{student?.semester} Semester</span>
+					</div>
+					<div className='flex justify-between w-full  border-b p-2'>
+						<div className='font-bold'>Gender:</div>
+						<span>{student?.gender}</span>
+					</div>
+				</div>
 			</CardHeader>
 			<CardContent className='flex flex-col space-y-4'>
-				<div className='w-full flex justify-center'>
-					<div />
-				</div>
 				<div className='grid grid-cols-2 gap-4'>
 					<Dialog>
 						<DialogTrigger asChild>
@@ -59,44 +81,89 @@ export default function StudentSummaryPage({
 						</DialogTrigger>
 						<DialogContent className='sm:max-w-[425px]'>
 							<DialogHeader>
-								<DialogTitle>Edit profile</DialogTitle>
+								<DialogTitle>Fees</DialogTitle>
 								<DialogDescription>
-									Make changes to your profile here.
-									Click save when you&apos;re done.
+									All fees must be paid and
+									completely verified to gain access
+									into the exam hall.
 								</DialogDescription>
 							</DialogHeader>
-							<div className='grid gap-4 py-4'>
-								<div className='grid grid-cols-4 items-center gap-4'>
-									<Label
-										htmlFor='name'
-										className='text-right'
-									>
-										Name
-									</Label>
-									<Input
-										id='name'
-										defaultValue='Pedro Duarte'
-										className='col-span-3'
-									/>
+							<div className='grid gap-4 py-4 text-xs'>
+								<div className='font-extrabold grid grid-cols-5 items-center gap-4'>
+									<div className='col-span-2'>
+										Fees
+									</div>
+									<div className='col-span-3 grid grid-cols-4 gap-2'>
+										<div className=''>
+											Account
+										</div>
+										<div className=''>Dean</div>
+										<div className=''>DIA</div>
+										<div className=''>DVC</div>
+									</div>
 								</div>
-								<div className='grid grid-cols-4 items-center gap-4'>
-									<Label
-										htmlFor='username'
-										className='text-right'
+								{student?.fees.map((a) => (
+									<div
+										key={a.name}
+										className='grid grid-cols-5 items-center gap-4'
 									>
-										Username
-									</Label>
-									<Input
-										id='username'
-										defaultValue='@peduarte'
-										className='col-span-3'
-									/>
-								</div>
+										<div className='col-span-2 font-bold'>
+											{a.name}
+										</div>
+										<div className='col-span-3 grid grid-cols-4'>
+											<Checkbox
+												id='accountant'
+												checked={
+													a.accountCheck
+												}
+												disabled
+											/>
+											<Checkbox
+												id='dean'
+												checked={
+													a.deanCheck
+												}
+												disabled
+											/>
+											<Checkbox
+												id='dia'
+												checked={a.diaCheck}
+												disabled
+											/>
+											<Checkbox
+												id='dvc'
+												checked={a.dvcCheck}
+												disabled
+											/>
+										</div>
+									</div>
+								))}
 							</div>
-							<DialogFooter>
-								<Button type='submit'>
-									Save changes
-								</Button>
+							<DialogFooter
+								className={cn(
+									'items-center justify-center',
+									`${
+										student?.isCleared
+											? 'text-emerald-700'
+											: 'text-destructive'
+									}`
+								)}
+							>
+								{student?.isCleared ? (
+									<div className='flex flex-col items-center justify-center w-full'>
+										<div className='text-3xl font-bold'>
+											CLEARED
+										</div>
+										<CheckCircle className='h-20 w-20' />
+									</div>
+								) : (
+									<div className='flex flex-col items-center justify-center w-full'>
+										<div className='text-3xl font-bold'>
+											OWING
+										</div>
+										<X className='h-20 w-20' />
+									</div>
+								)}
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
@@ -109,95 +176,65 @@ export default function StudentSummaryPage({
 						</DialogTrigger>
 						<DialogContent className='sm:max-w-[425px]'>
 							<DialogHeader>
-								<DialogTitle>Edit profile</DialogTitle>
+								<DialogTitle>Attendance</DialogTitle>
 								<DialogDescription>
-									Make changes to your profile here.
-									Click save when you&apos;re done.
+									All
 								</DialogDescription>
 							</DialogHeader>
 							<div className='grid gap-4 py-4'>
-								<div className='grid grid-cols-4 items-center gap-4'>
-									<Label
-										htmlFor='name'
-										className='text-right'
-									>
-										Name
-									</Label>
-									<Input
-										id='name'
-										defaultValue='Pedro Duarte'
-										className='col-span-3'
-									/>
-								</div>
-								<div className='grid grid-cols-4 items-center gap-4'>
-									<Label
-										htmlFor='username'
-										className='text-right'
-									>
-										Username
-									</Label>
-									<Input
-										id='username'
-										defaultValue='@peduarte'
-										className='col-span-3'
-									/>
-								</div>
+								<table className='text-left w-full border-collapse'>
+									<thead>
+										<tr className='bg-[#007bff] text-white'>
+											<th className='py-2 px-2 bg-blue-600 border-b border-blue-500'>
+												Course Code
+											</th>
+											<th className='py-2 px-2 bg-blue-600 border-b border-blue-500'>
+												Sessions
+											</th>
+											<th className='py-2 px-2 bg-blue-600 border-b border-blue-500'>
+												Attended
+											</th>
+											<th className='py-2 px-2 bg-blue-600 border-b border-blue-500'>
+												Attendance
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										{student?.attendance.map(
+											(a) => (
+												<tr
+													key={a.course}
+													className='hover:bg-blue-100'
+												>
+													<td className='py-2 px-2 border-b border-blue-500'>
+														{a.course}
+													</td>
+													<td className='py-2 px-2 border-b border-blue-500'>
+														{
+															a.sessions
+														}
+													</td>
+													<td className='py-2 px-2 border-b border-blue-500'>
+														{
+															a.attended
+														}
+													</td>
+													<td className='py-2 px-2 border-b border-blue-500'>
+														{(
+															(a.attended /
+																a.sessions) *
+															100
+														).toFixed(
+															2
+														)}
+														%
+													</td>
+												</tr>
+											)
+										)}
+									</tbody>
+								</table>
 							</div>
-							<DialogFooter>
-								<Button type='submit'>
-									Save changes
-								</Button>
-							</DialogFooter>
-						</DialogContent>
-					</Dialog>
-					<Dialog>
-						<DialogTrigger asChild>
-							<Button variant='outline'>
-								<CalendarCheckIcon className='mr-2 h-4 w-4' />
-								Attendance
-							</Button>
-						</DialogTrigger>
-						<DialogContent className='sm:max-w-[425px]'>
-							<DialogHeader>
-								<DialogTitle>Edit profile</DialogTitle>
-								<DialogDescription>
-									Make changes to your profile here.
-									Click save when you&apos;re done.
-								</DialogDescription>
-							</DialogHeader>
-							<div className='grid gap-4 py-4'>
-								<div className='grid grid-cols-4 items-center gap-4'>
-									<Label
-										htmlFor='name'
-										className='text-right'
-									>
-										Name
-									</Label>
-									<Input
-										id='name'
-										defaultValue='Pedro Duarte'
-										className='col-span-3'
-									/>
-								</div>
-								<div className='grid grid-cols-4 items-center gap-4'>
-									<Label
-										htmlFor='username'
-										className='text-right'
-									>
-										Username
-									</Label>
-									<Input
-										id='username'
-										defaultValue='@peduarte'
-										className='col-span-3'
-									/>
-								</div>
-							</div>
-							<DialogFooter>
-								<Button type='submit'>
-									Save changes
-								</Button>
-							</DialogFooter>
 						</DialogContent>
 					</Dialog>
 				</div>

@@ -48,16 +48,16 @@ export const STUDENTS = [
 			{ course: 'CSC 304', sessions: 18, attended: 18 },
 			{ course: 'GST 200', sessions: 22, attended: 20 },
 		],
-		image: 'https://github.com/shadcn.png',
+		image: '/lekan.jpg',
 	},
 	{
-		'matric-number': '021-0101-0055',
-		name: 'Doe Jane Emily',
+		'matric-number': '023-0101-025',
+		name: 'Aigbe Obehi Eniola',
 		session: '2023/2024',
-		faculty: 'Engineering',
-		department: 'Mechanical Engineering',
-		level: '200 Level',
-		semester: 'First',
+		faculty: 'Science',
+		department: 'Computer Science',
+		level: '300 Level',
+		semester: 'Second',
 		gender: 'female',
 		fees: [
 			{
@@ -99,7 +99,7 @@ export const STUDENTS = [
 			{ course: 'MTH 205', sessions: 20, attended: 15 },
 			{ course: 'GST 200', sessions: 22, attended: 18 },
 		],
-		image: 'https://github.com/shadcn.png',
+		image: '/eniola.jpg',
 	},
 	{
 		'matric-number': '021-0101-0056',
